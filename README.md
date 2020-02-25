@@ -3,18 +3,18 @@ This automated flag submitter can automatically run your exploit, every tick, fo
 
 # Arguments
 This scripts give you a lot of options to enable this script to work for you and your team in whatever way you'd like so you can get back to hacking.
-## Required:
+### Required:
 * file: This is the path to the file that either links a service to a different file (if running swpag) or is just the path to the file that contains the commands to send over to the victim
 * logFile: Where to write logs of the flag submissions to. Defaults to flagLogs.txt
 * swpagClient: Are you using the swpag client? Defaults to True.
-## Optional:
+### Optional:
 * ignoreHost: Did you make an ally with a team? Use this flag to skip over them when capturing flags
 * slackToken: Get your [slack api token](https://api.slack.com/legacy/custom-integrations/legacy-tokens) to submit flag updates to your slack channel. If you give the slack channel arg, you must also give this arg for slack updates to work.
 * slackChannel: The name of the slack channel to send updates to. If you give the slack token arg, you must also give this arg for slack updates to work.
-## SWPAG Users:
+### SWPAG Users:
 * teamToken (Only for swpag users): Your team token to submit flags
 * teampIp (Only for swpag users): Your team ip to submit flags
-## Other Users:
+### Other Users:
 * hosts (Only for non-swpag users): Give a list of all the hosts, separated by a comma to attack. For example: 10.0.0.2,10.0.0.1
 * sleep (Only for non-swpag users): Give the amount of time (in minutes) that a tick lasts. Only needed for non-swpag users.
 
