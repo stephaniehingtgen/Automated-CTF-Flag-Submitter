@@ -51,9 +51,18 @@ and submit the flag using swpag_client. It will log the output and notify you ov
 It will run these exploits every tick for every service you list in file1 to all targets (except if you put a host to ignore).
 
 ## Other Users
+For non-swpag users, you will run:
 ```
 python3 submitFlags.py --file <path directory to commands to run> --sleep 3 --swpagClient False
 ```
+All commands will go into one file. If you want to read in a command output and use it later on, use !READIN to have the script stop anding commands together and read in the variable and use $READIN later in the script to use that variable. You can also use $HOST to replace the current target in the command line.
+
+It will run every exploit for every host in /etc/hosts, except for localhost or an ignored host you put in. Alternatively, you can give a list of hosts to run the exploit on. It will log the output and notify you over slack (if slack channel and token are given).
+
+After running the exploit on all targets, it will sleep for however many minutes you input. 
+
+Note: You will have to write how to submit the flag within your commands file. 
+
 # Authors
 * [Stephanie Hingtgen](https://github.com/stephanieengelhardt)
 * [Matthew Calcote](https://github.com/mcalcote) 
