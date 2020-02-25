@@ -101,7 +101,7 @@ def readSWPAGFile(filePath):
     serviceExploits = {}
     # read through line by line and append the commands together
     for line in f:
-        entryArr = line.split("!EXPLOITBEGINS!")
+        entryArr = line.split("!EXPLOITFILENAME!")
         serviceExploits[entryArr[0]] = entryArr[1]
     return serviceExploits
 
