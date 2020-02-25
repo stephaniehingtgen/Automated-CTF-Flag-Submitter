@@ -25,9 +25,31 @@ python3 submitFlags.py --help
 
 # How to Run
 ## SWPAG Users
+To run the program, you will run the command:
 ```
-python3 submitFlags.py --file <path directory to the file that maps each service to a file> --teamIp <team ip> --teamToken <team token>
+python3 submitFlags.py --file <path directory to file1> --teamIp <team ip> --teamToken <team token>
 ```
+But first, you have to create file1, which is a file that links the service name to the file with the actual exploit.
+The file will look like this:
+```
+service1!EXPLOITFILENAME!/path/to/exploit/commands.txt
+service2!EXPLOITFILENAME!/path/to/exploit/commands2.txt
+service3!EXPLOITFILENAME!/path/to/exploit/commands3.txt
+[...]
+```
+Then your commands.txt files will be the commands you were running against the service to get the exploit. For example:
+```
+2
+d
+l
+s
+cat $(ls *) | grep FLG_
+```
+The program will loop through these commands, sleeping for .5 seconds to allow the service to respond, and then read the output
+and submit the flag using swpag_client. It will log the output and notify you over slack (if slack channel and token are given).
+
+It will run these exploits every tick for every service you list in file1 to all targets (except if you put a host to ignore).
+
 ## Other Users
 ```
 python3 submitFlags.py --file <path directory to commands to run> --sleep 3 --swpagClient False
