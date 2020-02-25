@@ -10,4 +10,4 @@ This automated flag submitter can automatically run your exploit, every tick, fo
 
 # Authors
 * [Stephanie Hingtgen](https://github.com/stephanieengelhardt)
-* [Matthe Calcote](https://github.com/mcalcote) 
+* [Matthew Calcote](https://github.com/mcalcote) 
