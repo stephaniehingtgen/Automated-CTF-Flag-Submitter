@@ -1,5 +1,5 @@
 # Automated-CTF-Flag-Submitter
-This automated flag submitter can automatically run your exploit, every tick, for the swpag client or it can run exploits at a given time interval and submit them given your commands. It enables you to send updates to a slack channel as well 
+This automated flag submitter can automatically run your exploit at every tick for every target and submit your flags for you! This flag submitter was written for both swpag users and non-swpag users. It gives you the option to get all flag submission results sent to your slack channel and it logs everything for you! You also can ignore targets if you happen to make an alliance with another team.
 
 # Arguments
 This scripts give you a lot of options to enable this script to work for you and your team in whatever way you'd like so you can get back to hacking.
