@@ -55,7 +55,7 @@ If you are a non-swpag user, you will need to run one of these scripts per explo
 ```
 python3 submitFlags.py --file <path directory to commands to run> --sleep 3 --swpagClient False
 ```
-All commands will go into one file. If you want to read in a command output and use it later on, use !READIN to have the script stop anding commands together and read in the variable and use $READIN later in the script to use that variable. You can also use $HOST to replace the current target in the command line.
+All commands will go into one file. If you want to read in a command output and use it later on, use !READIN to have the script stop anding commands together and read in the variable and use $READIN later in the script to use that variable. You can also use $HOST to replace the current target in the command line. It will submit the final output per target.
 
 It will run the exploit for every host in /etc/hosts, except for localhost or an ignored host you put in. Alternatively, you can give a list of hosts to run the exploit on. It will log the output and notify you over slack (if slack channel and token are given).
 
